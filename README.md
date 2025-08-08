@@ -116,13 +116,28 @@ git push -u origin main
 ## 📸 Screenshots
 
 ### Home Page
-![Home Page](screenshots/home.png)
+![Home Page](https://freeimage.host/i/FsQ5YyF)
+(https://freeimage.host/i/FsQVUvf)
+(https://freeimage.host/i/FsQWh8b)
+
+### Register Page
+![Register Page](https://freeimage.host/i/FsQjvol)
+
+
+### Login Page
+![Login Page](https://freeimage.host/i/FsQNDa1)
 
 ### Security Dashboard
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](https://freeimage.host/i/FsQUrl4)
+
+### Scan Reports
+![Results](https://freeimage.host/i/FsQrRyB)
 
 ### Scan Results
-![Results](screenshots/results.png)
+![Results](https://freeimage.host/i/FsQ4Zxt)
+
+### Scan Document
+![Results](https://freeimage.host/i/FsQiRKg)
 
 ## 🔧 Configuration
 
