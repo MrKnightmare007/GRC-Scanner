@@ -118,8 +118,8 @@ git push -u origin main
 
 ### Home Page
 ![Home Page](https://iili.io/FsQ5YyF.png)
-(https://iili.io/FsQVUvf.png)
-(https://iili.io/FsQWh8b.png)
+![Home Page 2](https://iili.io/FsQVUvf.png)
+![Home Page 3](https://iili.io/FsQWh8b.png)
 
 ### Register Page
 ![Register Page](https://iili.io/FsQjvol.png)
