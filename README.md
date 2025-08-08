@@ -1,4 +1,7 @@
-# ���️ GRC Scanner
+# ���️ GRC Scanner ���️
+
+## 🚀 Introduction
+
 **Advanced Cybersecurity Scanning Platform**
 
 A comprehensive web application security assessment tool that identifies vulnerabilities, analyzes security headers, and generates detailed compliance reports.
