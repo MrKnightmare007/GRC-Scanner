@@ -20,11 +20,13 @@ app = Flask(__name__)
 
 # CORS Configuration for production
 frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:3000')
+
+# Configure CORS with explicit settings
 CORS(app, 
-     origins=[frontend_url, 'http://localhost:3000', 'https://grc-scanner.vercel.app'],
+     origins=['*'],  # Allow all origins for now
      methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-     allow_headers=['Content-Type', 'Authorization'],
-     supports_credentials=True)
+     allow_headers=['Content-Type', 'Authorization', 'Access-Control-Allow-Credentials'],
+     supports_credentials=False)  # Set to False for wildcard origins
 
 # Database Configuration
 database_url = os.getenv('DATABASE_URL')
@@ -43,6 +45,23 @@ app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'dev-jwt-secret-chang
 
 jwt = JWTManager(app)
 db = SQLAlchemy(app)
+
+# Global CORS handler
+@app.before_request
+def handle_preflight():
+    if request.method == "OPTIONS":
+        response = jsonify()
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add('Access-Control-Allow-Headers', "Content-Type,Authorization")
+        response.headers.add('Access-Control-Allow-Methods', "GET,PUT,POST,DELETE,OPTIONS")
+        return response
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
