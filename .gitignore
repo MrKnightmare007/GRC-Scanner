@@ -37,6 +37,24 @@ yarn-error.log*
 # Reports
 backend/reports/*.pdf
 
+# Documentation files (keep only README.md)
+BRANDING_GUIDE.md
+DEPLOYMENT_CHECKLIST.md
+DEPLOYMENT_GUIDE.md
+DEPLOYMENT_SUMMARY.md
+DEPLOYMENT.md
+ENHANCED_PDF_FEATURES.md
+ENHANCED_UI_README.md
+QUICK_DEPLOY.md
+START_LOCALLY.md
+test_fixes.md
+TROUBLESHOOTING.md
+
+# Development scripts
+start_dev.py
+start_dev.bat
+generate_secrets.py
+
 # IDE
 .vscode/
 .idea/

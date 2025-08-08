@@ -65,12 +65,53 @@ npm start
 - Frontend: http://localhost:3000
 - Backend: http://localhost:5000
 
+### Quick Start Commands
+```bash
+# Terminal 1 - Backend
+cd backend
+python app.py
+
+# Terminal 2 - Frontend  
+cd frontend
+npm start
+```
+
+> **Note**: Development helper scripts are available locally but excluded from the repository to keep it clean.
+
 ## 🌐 Deployment
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions using:
-- **Railway** (Backend)
-- **Vercel** (Frontend)
-- **PostgreSQL** (Database)
+### Quick Deployment Steps
+
+1. **Generate Security Keys**
+```python
+import secrets
+print(f"SECRET_KEY={secrets.token_urlsafe(32)}")
+print(f"JWT_SECRET_KEY={secrets.token_urlsafe(32)}")
+```
+
+2. **Push to GitHub**
+```bash
+git init
+git add .
+git commit -m "Initial commit: GRC Scanner"
+git remote add origin https://github.com/YOUR_USERNAME/grc-scanner.git
+git push -u origin main
+```
+
+3. **Deploy Backend (Railway)**
+- Go to https://railway.app
+- Deploy from GitHub repo (select `backend` folder)
+- Add environment variables (SECRET_KEY, JWT_SECRET_KEY, FLASK_ENV=production)
+- Add PostgreSQL database
+
+4. **Deploy Frontend (Vercel)**
+- Go to https://vercel.com
+- Import GitHub repo (set root to `frontend`)
+- Add environment variable: `REACT_APP_API_URL=https://your-backend.railway.app`
+
+5. **Connect & Test**
+- Update `FRONTEND_URL` in Railway with your Vercel URL
+- Test all functionality
 
 ## 📸 Screenshots
 
