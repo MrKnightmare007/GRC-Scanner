@@ -207,4 +207,4 @@ This tool is designed for authorized security testing only. Users are responsibl
 
 ---
 
-**Made with ❤️ for cybersecurity professionals**
+**Made with ❤️ for cybersecurity enthusiasts!**
