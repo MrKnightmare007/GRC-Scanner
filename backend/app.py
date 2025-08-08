@@ -366,19 +366,23 @@ def generate_pdf_report(scan_id, url, security_headers_report, owasp_report, por
 
 @app.route('/register', methods=['POST'])
 def register():
-    data = request.get_json()
-    if not data or not 'username' in data or not 'password' in data:
-        return jsonify({'message': 'Missing username or password'}), 400
+    try:
+        data = request.get_json()
+        if not data or not 'username' in data or not 'password' in data:
+            return jsonify({'message': 'Missing username or password'}), 400
 
-    if User.query.filter_by(username=data['username']).first():
-        return jsonify({'message': 'User already exists'}), 400
+        if User.query.filter_by(username=data['username']).first():
+            return jsonify({'message': 'User already exists'}), 400
 
-    new_user = User(username=data['username'])
-    new_user.set_password(data['password'])
-    db.session.add(new_user)
-    db.session.commit()
+        new_user = User(username=data['username'])
+        new_user.set_password(data['password'])
+        db.session.add(new_user)
+        db.session.commit()
 
-    return jsonify({'message': 'User created successfully'}), 201
+        return jsonify({'message': 'User created successfully'}), 201
+    except Exception as e:
+        print(f"Registration error: {e}")
+        return jsonify({'message': f'Registration failed: {str(e)}'}), 500
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -534,10 +538,18 @@ def root():
 
 @app.route('/health', methods=['GET'])
 def health_check():
+    try:
+        # Test database connection
+        db.session.execute('SELECT 1')
+        db_status = 'connected'
+    except Exception as e:
+        db_status = f'error: {str(e)}'
+    
     return jsonify({
         'status': 'healthy',
         'message': 'GRC Scanner API is running',
-        'version': '1.0.0'
+        'version': '1.0.0',
+        'database': db_status
     }), 200
 
 if __name__ == '__main__':
