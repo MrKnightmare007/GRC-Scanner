@@ -560,15 +560,22 @@ def health_check():
         'database': db_status
     }), 200
 
+# Initialize database and directories
+def init_app():
+    try:
+        with app.app_context():
+            db.create_all()
+        # Ensure reports directory exists
+        if not os.path.exists('reports'):
+            os.makedirs('reports')
+        print("App initialization completed successfully")
+    except Exception as e:
+        print(f"App initialization error: {e}")
+
+# Initialize on import
+init_app()
+
 if __name__ == '__main__':
-    # Ensure reports directory exists
-    if not os.path.exists('reports'):
-        os.makedirs('reports')
-    
-    # Initialize database
-    with app.app_context():
-        db.create_all()
-    
     # Run the application
     port = int(os.getenv('PORT', 5000))
     debug_mode = os.getenv('FLASK_ENV') != 'production'
