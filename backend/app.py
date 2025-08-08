@@ -395,7 +395,7 @@ def login():
     if not user or not user.check_password(data['password']):
         return jsonify({'message': 'Invalid username or password'}), 401
 
-    access_token = create_access_token(identity=user.id)
+    access_token = create_access_token(identity=str(user.id))
     return jsonify(access_token=access_token)
 
 @app.route('/scan', methods=['POST'])
@@ -548,7 +548,8 @@ def debug():
 def health_check():
     try:
         # Test database connection
-        db.session.execute('SELECT 1')
+        from sqlalchemy import text
+        db.session.execute(text('SELECT 1'))
         db_status = 'connected'
     except Exception as e:
         db_status = f'error: {str(e)}'
@@ -564,7 +565,10 @@ def health_check():
 def init_app():
     try:
         with app.app_context():
-            db.create_all()
+            # Force table creation
+            db.drop_all()  # Remove existing tables
+            db.create_all()  # Create fresh tables
+            print("Database tables created successfully")
         # Ensure reports directory exists
         if not os.path.exists('reports'):
             os.makedirs('reports')
