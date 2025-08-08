@@ -113,12 +113,13 @@ git push -u origin main
 - Update `FRONTEND_URL` in Railway with your Vercel URL
 - Test all functionality
 
-## 📸 Screenshots
 
 ## 📸 Screenshots
 
 ### Home Page
 ![Home Page](https://iili.io/FsQ5YyF.png)
+(https://iili.io/FsQVUvf.png)
+(https://iili.io/FsQWh8b.png)
 
 ### Register Page
 ![Register Page](https://iili.io/FsQjvol.png)
