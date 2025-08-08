@@ -19,14 +19,11 @@ load_dotenv()
 app = Flask(__name__)
 
 # CORS Configuration for production
-frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:3000')
-
-# Configure CORS with explicit settings
 CORS(app, 
-     origins=['*'],  # Allow all origins for now
+     origins=['*'],
      methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-     allow_headers=['Content-Type', 'Authorization', 'Access-Control-Allow-Credentials'],
-     supports_credentials=False)  # Set to False for wildcard origins
+     allow_headers=['Content-Type', 'Authorization'],
+     supports_credentials=False)
 
 # Database Configuration
 database_url = os.getenv('DATABASE_URL')
@@ -46,22 +43,7 @@ app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'dev-jwt-secret-chang
 jwt = JWTManager(app)
 db = SQLAlchemy(app)
 
-# Global CORS handler
-@app.before_request
-def handle_preflight():
-    if request.method == "OPTIONS":
-        response = jsonify()
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add('Access-Control-Allow-Headers', "Content-Type,Authorization")
-        response.headers.add('Access-Control-Allow-Methods', "GET,PUT,POST,DELETE,OPTIONS")
-        return response
 
-@app.after_request
-def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-    return response
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -382,10 +364,8 @@ def generate_pdf_report(scan_id, url, security_headers_report, owasp_report, por
     pdf.output(report_path)
     return report_path
 
-@app.route('/register', methods=['POST', 'OPTIONS'])
+@app.route('/register', methods=['POST'])
 def register():
-    if request.method == 'OPTIONS':
-        return '', 200
     data = request.get_json()
     if not data or not 'username' in data or not 'password' in data:
         return jsonify({'message': 'Missing username or password'}), 400
@@ -400,10 +380,8 @@ def register():
 
     return jsonify({'message': 'User created successfully'}), 201
 
-@app.route('/login', methods=['POST', 'OPTIONS'])
+@app.route('/login', methods=['POST'])
 def login():
-    if request.method == 'OPTIONS':
-        return '', 200
     data = request.get_json()
     if not data or not 'username' in data or not 'password' in data:
         return jsonify({'message': 'Missing username or password'}), 400
@@ -416,14 +394,9 @@ def login():
     access_token = create_access_token(identity=user.id)
     return jsonify(access_token=access_token)
 
-@app.route('/scan', methods=['POST', 'OPTIONS'])
+@app.route('/scan', methods=['POST'])
+@jwt_required()
 def scan():
-    if request.method == 'OPTIONS':
-        return '', 200
-    
-    # JWT required for actual POST requests
-    from flask_jwt_extended import verify_jwt_in_request
-    verify_jwt_in_request()
     data = request.get_json()
     if not data or not 'url' in data:
         return jsonify({'message': 'Missing URL'}), 400
@@ -494,14 +467,9 @@ def scan():
         db.session.commit()
         return jsonify({'message': f'Scan failed: {str(e)}'}), 500
 
-@app.route('/history', methods=['GET', 'OPTIONS'])
+@app.route('/history', methods=['GET'])
+@jwt_required()
 def history():
-    if request.method == 'OPTIONS':
-        return '', 200
-    
-    # JWT required for actual GET requests
-    from flask_jwt_extended import verify_jwt_in_request
-    verify_jwt_in_request()
     user_id = get_jwt_identity()
     
     scans = ScanHistory.query.filter_by(user_id=user_id).all()
