@@ -536,6 +536,14 @@ def root():
         }
     }), 200
 
+@app.route('/debug', methods=['GET'])
+def debug():
+    return jsonify({
+        'database_url_exists': bool(os.getenv('DATABASE_URL')),
+        'database_uri': app.config['SQLALCHEMY_DATABASE_URI'][:50] + '...' if len(app.config['SQLALCHEMY_DATABASE_URI']) > 50 else app.config['SQLALCHEMY_DATABASE_URI'],
+        'environment': os.getenv('FLASK_ENV', 'not_set')
+    }), 200
+
 @app.route('/health', methods=['GET'])
 def health_check():
     try:
