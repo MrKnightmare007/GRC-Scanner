@@ -14,8 +14,8 @@ A comprehensive web application security assessment tool that identifies vulnera
 
 ## 🚀 Live Demo
 
-- **Frontend**: [https://your-app.vercel.app](https://your-app.vercel.app)
-- **Backend API**: [https://your-app.railway.app](https://your-app.railway.app)
+- **Frontend**: [https://grc-scanner.vercel.app](https://grc-scanner.vercel.app)
+- **Backend API**: [https://grc-scanner-production.up.railway.app](https://grc-scanner-production.up.railway.app)
 
 ## 🛠️ Tech Stack
 
@@ -43,7 +43,7 @@ A comprehensive web application security assessment tool that identifies vulnera
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/YOUR_USERNAME/grc-scanner.git
+git clone https://github.com/MrKnightmare007/GRC-Scanner.git
 cd grc-scanner
 ```
 
