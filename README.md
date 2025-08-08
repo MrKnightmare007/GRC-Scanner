@@ -115,30 +115,28 @@ git push -u origin main
 
 ## 📸 Screenshots
 
+## 📸 Screenshots
+
 ### Home Page
-![Home Page](https://freeimage.host/i/FsQ5YyF)
-(https://freeimage.host/i/FsQVUvf)
-(https://freeimage.host/i/FsQWh8b)
+![Home Page](https://iili.io/FsQ5YyF.png)
 
 ### Register Page
-![Register Page](https://freeimage.host/i/FsQjvol)
-
+![Register Page](https://iili.io/FsQjvol.png)
 
 ### Login Page
-![Login Page](https://freeimage.host/i/FsQNDa1)
+![Login Page](https://iili.io/FsQNDa1.png)
 
 ### Security Dashboard
-![Dashboard](https://freeimage.host/i/FsQUrl4)
+![Dashboard](https://iili.io/FsQUrl4.png)
 
 ### Scan Reports
-![Results](https://freeimage.host/i/FsQrRyB)
+![Scan Reports](https://iili.io/FsQrRyB.png)
 
 ### Scan Results
-![Results](https://freeimage.host/i/FsQ4Zxt)
+![Scan Results](https://iili.io/FsQ4Zxt.png)
 
 ### Scan Document
-![Results](https://freeimage.host/i/FsQiRKg)
-
+![Scan Document](https://iili.io/FsQiRKg.png)
 ## 🔧 Configuration
 
 ### Environment Variables
